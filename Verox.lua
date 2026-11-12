@@ -17,7 +17,7 @@ local keyGui = Instance.new("ScreenGui", PG)
 keyGui.Name, keyGui.ResetOnSpawn, keyGui.IgnoreGuiInset = "XLAIAHIRIS_KeySystem", false, true
 
 local keyFrame = Instance.new("Frame", keyGui)
-keyFrame.Size, keyFrame.Position, keyFrame.BackgroundColor3 = UDim2.new(0,300,0,250), UDim2.new(0.5,-150,0.5,-125), BG
+keyFrame.Size, keyFrame.Position, keyFrame.BackgroundColor3 = UDim2.new(0,300,0,240), UDim2.new(0.5,-150,0.5,-120), BG
 Instance.new("UICorner", keyFrame).CornerRadius = UDim.new(0,12)
 Instance.new("UIStroke", keyFrame).Color = RB2
 
@@ -32,28 +32,24 @@ local kBtn = Instance.new("TextButton", keyFrame)
 kBtn.Size, kBtn.Position, kBtn.BackgroundColor3, kBtn.Text, kBtn.TextColor3, kBtn.Font, kBtn.TextSize = UDim2.new(0,260,0,36), UDim2.new(0.5,-130,0,110), A, "VERIFY", BG, Enum.Font.GothamBold, 14
 Instance.new("UICorner", kBtn).CornerRadius = UDim.new(0,6)
 
--- DISCORD BUTTON (Pinalitan ang Text)
-local dBtn = Instance.new("TextButton", keyFrame)
-dBtn.Size, dBtn.Position, dBtn.BackgroundColor3, dBtn.Text, dBtn.TextColor3, dBtn.Font, dBtn.TextSize = UDim2.new(0,260,0,30), UDim2.new(0.5,-130,0,160), Color3.fromRGB(88, 101, 242), Color3.fromRGB(255, 255, 255), Enum.Font.GothamBold, 12
-dBtn.Text = "Join Verox Discord"
-Instance.new("UICorner", dBtn).CornerRadius = UDim.new(0,6)
+-- DISCORD LINK DISPLAY (Naka-box, pwedeng i-click para ma-copy)
+local dBox = Instance.new("TextButton", keyFrame)
+dBox.Size, dBox.Position, dBox.BackgroundColor3, dBox.Text, dBox.TextColor3, dBox.Font, dBox.TextSize = UDim2.new(0,260,0,24), UDim2.new(0.5,-130,0,160), RB, DISCORD_LINK, A, Enum.Font.GothamBold, 11
+dBox.AutoButtonColor = false
+Instance.new("UICorner", dBox).CornerRadius = UDim.new(0,4)
 
 local kStatus = Instance.new("TextLabel", keyFrame)
-kStatus.Size, kStatus.Position, kStatus.BackgroundTransparency, kStatus.Text, kStatus.TextColor3, kStatus.Font, kStatus.TextSize = UDim2.new(1,0,0,20), UDim2.new(0,0,0,210), 1, "", MU, Enum.Font.GothamBold, 11
+kStatus.Size, kStatus.Position, kStatus.BackgroundTransparency, kStatus.Text, kStatus.TextColor3, kStatus.Font, kStatus.TextSize = UDim2.new(1,0,0,20), UDim2.new(0,0,0,195), 1, "Click link to copy", MU, Enum.Font.Gotham, 10
 
-dBtn.MouseButton1Click:Connect(function()
-    -- Universal Clipboard Function (Gumagana sa lahat ng Executor)
+dBox.MouseButton1Click:Connect(function()
     if setclipboard then
         setclipboard(DISCORD_LINK)
-        kStatus.Text = "✅ Link Copied! I-paste sa browser."
+        kStatus.Text = "✅ Copied!"
         kStatus.TextColor3 = A
     elseif toclipboard then
         toclipboard(DISCORD_LINK)
-        kStatus.Text = "✅ Link Copied! I-paste sa browser."
+        kStatus.Text = "✅ Copied!"
         kStatus.TextColor3 = A
-    else
-        kStatus.Text = "Link: " .. DISCORD_LINK
-        kStatus.TextColor3 = D
     end
 end)
 
