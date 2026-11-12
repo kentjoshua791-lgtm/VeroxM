@@ -2,8 +2,8 @@ local P, U, R, T = game:GetService("Players").LocalPlayer, game:GetService("User
 local PG = P:WaitForChild("PlayerGui")
 
 local old = PG:FindFirstChild("XLAIAHIRIS_KeySystem") if old then old:Destroy() end
-local oldMain = PG:FindFirstChild("XLAIAHIRIS_MainUI") if oldMain then oldMain:Destroy() end
-local oldFloat = PG:FindFirstChild("XLAIAHIRIS_Float") if oldFloat then oldFloat:Destroy() end
+local oldMain = PG:FindFirstChild("VeroX.Shit!_MainUI") if oldMain then oldMain:Destroy() end
+local oldFloat = PG:FindFirstChild("VeroX.Shit!_Float") if oldFloat then oldFloat:Destroy() end
 
 local A, D, BG, RB, RB2, TX, MU = Color3.fromRGB(90,160,255), Color3.fromRGB(255,70,90), Color3.fromRGB(15,17,21), Color3.fromRGB(26,29,37), Color3.fromRGB(32,36,46), Color3.fromRGB(235,238,245), Color3.fromRGB(120,128,145)
 
