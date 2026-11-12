@@ -8,7 +8,7 @@ local oldFloat = PG:FindFirstChild("XLAIAHIRIS_Float") if oldFloat then oldFloat
 local A, D, BG, RB, RB2, TX, MU = Color3.fromRGB(90,160,255), Color3.fromRGB(255,70,90), Color3.fromRGB(15,17,21), Color3.fromRGB(26,29,37), Color3.fromRGB(32,36,46), Color3.fromRGB(235,238,245), Color3.fromRGB(120,128,145)
 
 -- =======================================================
--- DISCORD INVITE LINK MO
+-- DISCORD INVITE LINK
 local DISCORD_LINK = "https://discord.gg/UR7Q8DMJs"
 -- =======================================================
 
@@ -32,17 +32,17 @@ local kBtn = Instance.new("TextButton", keyFrame)
 kBtn.Size, kBtn.Position, kBtn.BackgroundColor3, kBtn.Text, kBtn.TextColor3, kBtn.Font, kBtn.TextSize = UDim2.new(0,260,0,36), UDim2.new(0.5,-130,0,110), A, "VERIFY", BG, Enum.Font.GothamBold, 14
 Instance.new("UICorner", kBtn).CornerRadius = UDim.new(0,6)
 
--- DISCORD BUTTON (Copy Only - Universal)
+-- DISCORD BUTTON (Pinalitan ang Text)
 local dBtn = Instance.new("TextButton", keyFrame)
 dBtn.Size, dBtn.Position, dBtn.BackgroundColor3, dBtn.Text, dBtn.TextColor3, dBtn.Font, dBtn.TextSize = UDim2.new(0,260,0,30), UDim2.new(0.5,-130,0,160), Color3.fromRGB(88, 101, 242), Color3.fromRGB(255, 255, 255), Enum.Font.GothamBold, 12
-dBtn.Text = "Copy Discord Invite Link"
+dBtn.Text = "Join Verox Discord"
 Instance.new("UICorner", dBtn).CornerRadius = UDim.new(0,6)
 
 local kStatus = Instance.new("TextLabel", keyFrame)
 kStatus.Size, kStatus.Position, kStatus.BackgroundTransparency, kStatus.Text, kStatus.TextColor3, kStatus.Font, kStatus.TextSize = UDim2.new(1,0,0,20), UDim2.new(0,0,0,210), 1, "", MU, Enum.Font.GothamBold, 11
 
 dBtn.MouseButton1Click:Connect(function()
-    -- Universal Clipboard Function
+    -- Universal Clipboard Function (Gumagana sa lahat ng Executor)
     if setclipboard then
         setclipboard(DISCORD_LINK)
         kStatus.Text = "✅ Link Copied! I-paste sa browser."
@@ -52,7 +52,7 @@ dBtn.MouseButton1Click:Connect(function()
         kStatus.Text = "✅ Link Copied! I-paste sa browser."
         kStatus.TextColor3 = A
     else
-        kStatus.Text = "Copy this link: " .. DISCORD_LINK
+        kStatus.Text = "Link: " .. DISCORD_LINK
         kStatus.TextColor3 = D
     end
 end)
