@@ -9,7 +9,7 @@ local A, D, BG, RB, RB2, TX, MU = Color3.fromRGB(90,160,255), Color3.fromRGB(255
 
 -- =======================================================
 -- PALITAN ITO NG DISCORD INVITE LINK MO
-local DISCORD_LINK = "https://discord.gg/ILAGAY_MO_DITO"
+local DISCORD_LINK = "https://discord.gg/UR7Q8DMJs"
 -- =======================================================
 
 -- KEY UI
