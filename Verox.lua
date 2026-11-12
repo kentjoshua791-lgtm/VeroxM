@@ -7,12 +7,17 @@ local oldFloat = PG:FindFirstChild("XLAIAHIRIS_Float") if oldFloat then oldFloat
 
 local A, D, BG, RB, RB2, TX, MU = Color3.fromRGB(90,160,255), Color3.fromRGB(255,70,90), Color3.fromRGB(15,17,21), Color3.fromRGB(26,29,37), Color3.fromRGB(32,36,46), Color3.fromRGB(235,238,245), Color3.fromRGB(120,128,145)
 
--- KEY UI
+-- ==========================================
+-- PALITAN ITO NG DISCORD INVITE LINK MO
+local DISCORD_INVITE = "https://discord.gg/7eV5dRKCm"
+-- ==========================================
+
+-- KEY UI (Pinalaki natin nang konti para magkasya yung Discord button)
 local keyGui = Instance.new("ScreenGui", PG)
 keyGui.Name, keyGui.ResetOnSpawn, keyGui.IgnoreGuiInset = "XLAIAHIRIS_KeySystem", false, true
 
 local keyFrame = Instance.new("Frame", keyGui)
-keyFrame.Size, keyFrame.Position, keyFrame.BackgroundColor3 = UDim2.new(0,300,0,200), UDim2.new(0.5,-150,0.5,-100), BG
+keyFrame.Size, keyFrame.Position, keyFrame.BackgroundColor3 = UDim2.new(0,300,0,250), UDim2.new(0.5,-150,0.5,-125), BG
 Instance.new("UICorner", keyFrame).CornerRadius = UDim.new(0,12)
 Instance.new("UIStroke", keyFrame).Color = RB2
 
@@ -27,13 +32,29 @@ local kBtn = Instance.new("TextButton", keyFrame)
 kBtn.Size, kBtn.Position, kBtn.BackgroundColor3, kBtn.Text, kBtn.TextColor3, kBtn.Font, kBtn.TextSize = UDim2.new(0,260,0,36), UDim2.new(0.5,-130,0,110), A, "VERIFY", BG, Enum.Font.GothamBold, 14
 Instance.new("UICorner", kBtn).CornerRadius = UDim.new(0,6)
 
+-- BAGONG DISCORD BUTTON
+local dBtn = Instance.new("TextButton", keyFrame)
+dBtn.Size, dBtn.Position, dBtn.BackgroundColor3, dBtn.Text, dBtn.TextColor3, dBtn.Font, dBtn.TextSize = UDim2.new(0,260,0,30), UDim2.new(0.5,-130,0,160), Color3.fromRGB(88, 101, 242), Color3.fromRGB(255, 255, 255), Enum.Font.GothamBold, 12
+dBtn.Text = "Join Discord for Keys"
+Instance.new("UICorner", dBtn).CornerRadius = UDim.new(0,6)
+dBtn.MouseButton1Click:Connect(function()
+    local request = syn and syn.request or http_request or request
+    if request then
+        pcall(function() request({Url = DISCORD_INVITE, Method = "GET"}) end)
+    else
+        setclipboard(DISCORD_INVITE)
+        kStatus.Text = "Invite Copied! I-paste sa browser."
+        kStatus.TextColor3 = A
+    end
+end)
+
 local kStatus = Instance.new("TextLabel", keyFrame)
-kStatus.Size, kStatus.Position, kStatus.BackgroundTransparency, kStatus.Text, kStatus.TextColor3, kStatus.Font, kStatus.TextSize = UDim2.new(1,0,0,20), UDim2.new(0,0,0,160), 1, "", MU, Enum.Font.GothamBold, 11
+kStatus.Size, kStatus.Position, kStatus.BackgroundTransparency, kStatus.Text, kStatus.TextColor3, kStatus.Font, kStatus.TextSize = UDim2.new(1,0,0,20), UDim2.new(0,0,0,210), 1, "", MU, Enum.Font.GothamBold, 11
 
 -- MAIN SCRIPT FUNCTION
 local function loadMainScript(keyType, expireTime)
     local MAX, CAP = 100, 1200
-    local SMOOTHNESS = 0.15 -- Mas mababa = mas smooth at mabagal buildup. (0.05 = race car, 0.3 = truck)
+    local SMOOTHNESS = 0.15 
     
     local m, on, noclipOn = 2.0, false, false
     local DV = Color3.fromRGB(40,44,55)
@@ -173,14 +194,10 @@ local function loadMainScript(keyType, expireTime)
         if i.KeyCode == Enum.KeyCode.RightShift then updateActive(not on) end
     end)
 
-    -- ==========================================
-    -- 1000x SMOOTH HANDLING CORE (PID STYLE)
-    -- ==========================================
     local smoothedVelocity = Vector3.zero
     local isPrimed = false
 
     R.Stepped:Connect(function(_, dt)
-        -- Countdown Logic
         if keyType == "Trial" then
             local timeLeft = expireTime - os.time()
             if timeLeft <= 0 then
@@ -223,34 +240,26 @@ local function loadMainScript(keyType, expireTime)
         local v = seat.AssemblyLinearVelocity
         local horizontalVel = Vector3.new(v.X, 0, v.Z)
         
-        -- Kung nakatigil, wag galawin
         if horizontalVel.Magnitude < 0.1 then isPrimed = false return end
         
-        -- Kunin ang direksyon (Direction)
         local moveDir = horizontalVel.Unit
-        
-        -- Target Speed based sa multiplier
         local targetSpeed = horizontalVel.Magnitude * m
         if targetSpeed > CAP then targetSpeed = CAP end
         
-        -- Prime check
         if not isPrimed then
             smoothedVelocity = horizontalVel
             isPrimed = true
         end
         
-        -- FRAME-INDEPENDENT SMOOTHING (PID Lerp)
-        -- Ito ang nag-aadjust base sa framerate ng phone mo. 1000x smoother.
         local alpha = 1 - math.exp(-dt / (SMOOTHNESS + 0.001))
         local targetVelocity = moveDir * targetSpeed
         smoothedVelocity = smoothedVelocity:Lerp(targetVelocity, alpha)
         
-        -- I-apply pabalik, i-lock ang Y para hindi tumalon
         seat.AssemblyLinearVelocity = Vector3.new(smoothedVelocity.X, v.Y, smoothedVelocity.Z)
     end)
 end
 
--- VERIFY BUTTON (Same as before)
+-- VERIFY BUTTON
 kBtn.MouseButton1Click:Connect(function()
     local input = string.gsub(kBox.Text, "%s+", "")
     kStatus.Text = "Verifying..."
